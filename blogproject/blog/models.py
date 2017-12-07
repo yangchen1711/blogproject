@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 
 # Create your models here.
 
@@ -35,3 +36,8 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+    # 获取Post自己对应的URL
+    def get_absolute_url(self):
+        # print self.pk
+        return reverse('blog:detail', kwargs={'pk': self.pk})
