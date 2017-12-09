@@ -8,7 +8,7 @@ from forms import CommentForm
 def post_comment(request, post_pk):
     post = get_object_or_404(Post, pk=post_pk)
 
-    if request.method == 'post':
+    if request.method == 'POST':
         form = CommentForm(request.POST)
 
         if form.is_valid():

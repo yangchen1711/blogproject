@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from models import Post, Category
 import markdown
 from comments.forms import CommentForm
+
 # Create your views here.
 
 
@@ -18,6 +19,8 @@ def index(request):
 
 def detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
+
+    post.increase_views()
     post.body = markdown.markdown(post.body,
                                   extensions=[
                                       'markdown.extensions.extra',
@@ -34,8 +37,8 @@ def detail(request, pk):
 
 
 def archives(request, year, month):
-    post_list = Post.objects.filter(create_time__year = year,
-                                    create_time__month = month
+    post_list = Post.objects.filter(create_time__year=year,
+                                    create_time__month=month
                                     ).order_by('-create_time')
 
     return render(request, 'blog/index.html', context={'post_list': post_list})
