@@ -1,6 +1,6 @@
 # coding:utf-8
 from django.conf.urls import url
-
+from blog.feeds import AllPostsRssFeed
 import views
 # 告诉Django这个urls.py模块是属于blog应用的。即视图函数的命名空间。
 
